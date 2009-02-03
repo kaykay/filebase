@@ -27,7 +27,7 @@ class Filebase
       object.each do |k, v|
         if((v.class == Hash) and (v[:tempfile].class == Tempfile))
           dirpath = File.join instance_variable_get('@root'), 'files'
-          ::FileUtils.mkdir_p(filepath) unless File.exists?(filepath)
+          ::FileUtils.mkdir_p(filepath) unless File.exists?(dirpath)
           filepath = File.join dirpath, key
           ::FileUtils.mv(v[:tempfile].path, filepath, :force => true)
           object['filepath']  =  filepath
