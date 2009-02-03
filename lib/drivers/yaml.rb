@@ -25,11 +25,11 @@ class Filebase
     def save( key, object )
       #Hack to save uploaded files before serialization.
       object.each do |k, v|
-        if((v.class == Hash) and (v[:tempfile].class == Tempfile))
+        if((v.class == Hash) and (v[:tempfile].class == Tempfile) and (v[:tempfile].size != 0))
           dirpath = File.join instance_variable_get('@root'), 'files'
           ::FileUtils.mkdir_p(dirpath) unless File.exists?(dirpath)
           filepath = File.join dirpath, key
-          ::FileUtils.mv(v[:tempfile].path, filepath, :force => true) unless File.exists?(filepath)
+          ::FileUtils.mv(v[:tempfile].path, filepath, :force => true)
           object['filepath']  =  filepath
         end
 
