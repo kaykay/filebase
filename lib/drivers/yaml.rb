@@ -29,7 +29,7 @@ class Filebase
           dirpath = File.join instance_variable_get('@root'), 'files'
           ::FileUtils.mkdir_p(dirpath) unless File.exists?(dirpath)
           filepath = File.join dirpath, key
-          ::FileUtils.mv(v[:tempfile].path, filepath, :force => true)
+          ::FileUtils.mv(v[:tempfile].path, filepath, :force => true) unless File.exists?(filepath)
           object['filepath']  =  filepath
         end
 
