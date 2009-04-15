@@ -53,7 +53,7 @@ class Filebase
             define_method( name ) do
               @has_many ||= {}
               options[:class] ||= Object.module_eval( name.to_s.camel_case )
-              @has_many[name] ||= ( get( name ) || [] ).uniq.map { |key| options[:class].find( key ) }
+              @has_many[name] ||= ( get( name ) || [] ).uniq.map { |key| options[:class].find( key ) } - [nil]
             end
             # when we save, make sure to pick up any changes to the array
             (class<<self;self;end).module_eval do
